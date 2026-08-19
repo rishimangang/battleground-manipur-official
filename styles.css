@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #080a0d;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 6%;
+
+  background: rgba(8, 10, 13, 0.95);
+  border-bottom: 1px solid #292e35;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: #f5b51b;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: #dddddd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #f5b51b;
+}
+
+.hero {
+  min-height: 85vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8%;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,0.9),
+      rgba(0,0,0,0.25)
+    ),
+    url("assets/rishi-character.png")
+    center / cover;
+}
+
+.eyebrow {
+  color: #f5b51b;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: 13px;
+}
+
+.hero h1 {
+  margin: 12px 0;
+
+  font-size: clamp(48px, 9vw, 105px);
+  line-height: 0.9;
+  font-weight: 950;
+}
+
+.hero h1 span {
+  color: #f5b51b;
+}
+
+.tagline {
+  font-size: 24px;
+  color: #dddddd;
+}
+
+.button {
+  display: inline-block;
+
+  margin-top: 20px;
+  padding: 14px 24px;
+
+  background: #f5b51b;
+  color: #111111;
+
+  text-decoration: none;
+  font-weight: 900;
+
+  border-radius: 5px;
+}
+
+section {
+  max-width: 1300px;
+  margin: auto;
+  padding: 85px 7%;
+}
+
+h2 {
+  margin: 5px 0 30px;
+  font-size: 45px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+.text {
+  max-width: 800px;
+  color: #c4c9ce;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+.character {
+  display: grid;
+  grid-template-columns: minmax(260px, 600px) 1fr;
+  gap: 35px;
+
+  padding: 20px;
+
+  background: #11151a;
+  border: 1px solid #292f36;
+}
+
+.character img {
+  width: 100%;
+  display: block;
+}
+
+.character p {
+  color: #c4c9ce;
+  line-height: 1.7;
+}
+
+.map-image {
+  width: 100%;
+  display: block;
+
+  border: 1px solid #292f36;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.feature {
+  padding: 30px;
+
+  background: #11151a;
+  border: 1px solid #292f36;
+}
+
+.feature strong {
+  display: block;
+
+  color: #f5b51b;
+  font-size: 42px;
+}
+
+.feature span {
+  color: #aeb4bb;
+}
+
+.download {
+  text-align: center;
+  background: #0e1115;
+}
+
+button {
+  margin: 8px;
+  padding: 14px 20px;
+
+  background: #22272d;
+  color: #ffffff;
+
+  border: 1px solid #444;
+  border-radius: 5px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 30px 7%;
+
+  border-top: 1px solid #292e35;
+  color: #9da4ab;
+}
+
+@media (max-width: 750px) {
+
+  nav {
+    display: none;
+  }
+
+  .character {
+    grid-template-columns: 1fr;
+  }
+
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
