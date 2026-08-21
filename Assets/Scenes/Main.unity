@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000
+GameObject:
+  m_Name: BattlegroundManipur
+  m_IsActive: 1
+  m_Component:
+  - component: {fileID: 1001}
+--- !u!4 &1001
+Transform:
+  m_GameObject: {fileID: 1000}
+___ !u!114 &1002
+MonoBehaviour:
+  m_GameObject: {fileID: 1000}
+  m_Script: {fileID: 11500000, guid: 00000000000000000000000000000000, type: 3}
