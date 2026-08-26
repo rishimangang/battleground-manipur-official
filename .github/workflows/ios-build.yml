@@ -1,0 +1,54 @@
+name: Battleground Manipur iOS Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ios-build:
+    name: Build iOS Xcode Project
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: |
+          xcodebuild -version
+          xcode-select -p
+
+      - name: Check repository
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          find . -maxdepth 3 -type f | head -200
+
+      - name: Find Unity project
+        run: |
+          if [ -f "ProjectSettings/ProjectVersion.txt" ]; then
+            echo "Unity project found at repository root"
+          elif [ -d "Battleground-Manipur-Unity-Starter" ] && \
+               [ -f "Battleground-Manipur-Unity-Starter/ProjectSettings/ProjectVersion.txt" ]; then
+            echo "Unity project found in Battleground-Manipur-Unity-Starter"
+          else
+            echo "ERROR: Unity ProjectSettings/ProjectVersion.txt not found."
+            exit 1
+          fi
+
+      - name: Prepare build directory
+        run: |
+          mkdir -p ios-build
+          echo "macOS runner is ready for iOS/Xcode build."
+
+      - name: Upload project information
+        uses: actions/upload-artifact@v4
+        with:
+          name: battleground-manipur-ios-build-info
+          path: |
+            ProjectSettings/ProjectVersion.txt
+            Assets/
+            ProjectSettings/
+          if-no-files-found: warn
