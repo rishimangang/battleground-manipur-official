@@ -1,0 +1,36 @@
+workflows:
+  ios-build:
+    name: Battleground Manipur iOS
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+
+    environment:
+      xcode: latest
+      ios_signing:
+        distribution_type: ad_hoc
+        bundle_identifier: com.Battlegroundmanipur.game
+
+    scripts:
+      - name: Build Unity project
+        script: |
+          echo "Unity version:"
+          cat ProjectSettings/ProjectVersion.txt
+
+          echo "Building iOS project..."
+          /Applications/Unity/Hub/Editor/6000.5.0b11/Unity.app/Contents/MacOS/Unity \
+            -batchmode \
+            -quit \
+            -nographics \
+            -projectPath . \
+            -buildTarget iOS \
+            -executeMethod BuildScript.BuildIOS \
+            -logFile -
+
+    artifacts:
+      - build/ios/**/*.ipa
+      - build/ios/**/*.app
+
+    publishing:
+      email:
+        recipients:
+          - rishimangang2@gmail.com
