@@ -6,25 +6,38 @@ workflows:
 
     environment:
       xcode: latest
+
       ios_signing:
         distribution_type: ad_hoc
         bundle_identifier: com.Battlegroundmanipur.game
 
     scripts:
-      - name: Build Unity project
+      - name: Check Unity version
         script: |
           echo "Unity version:"
           cat ProjectSettings/ProjectVersion.txt
 
-          echo "Building iOS project..."
-          /Applications/Unity/Hub/Editor/6000.5.0b11/Unity.app/Contents/MacOS/Unity \
+      - name: Build Unity iOS
+        script: |
+          mkdir -p build/ios
+
+          /Applications/Unity/Hub/Editor/6000.5.0b11/Unity \
             -batchmode \
             -quit \
             -nographics \
-            -projectPath . \
+            -projectPath "$CM_BUILD_DIR" \
             -buildTarget iOS \
-            -executeMethod BuildScript.BuildIOS \
+            -executeMethod GameStarter.BuildIOS \
             -logFile -
+
+      - name: Apply signing
+        script: |
+          xcode-project use-profiles
+
+      - name: Create IPA
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/build/ios/*.xcodeproj"
 
     artifacts:
       - build/ios/**/*.ipa
@@ -33,4 +46,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - rishimangang2@gmail.com
+          - rishimangang20@gmail.com
+        notify:
+          success: true
+          failure: true
